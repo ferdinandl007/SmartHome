@@ -1,6 +1,6 @@
-# SmartHome
+## SmartHome  lightswitch with Alexa and and iOS app
 
-[demo video here](https://www.youtube.com/watch?v=D-yCt-Ropl0)
+[Watch a demo video here](https://www.youtube.com/watch?v=D-yCt-Ropl0)
 Ultimate Smart home Alexa plus iOS solution when you don't want to mess with main voltage 
 It uses 2 ESP8266   one for the light switch controlling a sorvo and another one controlling the TV//📺 
 Simply Open  .ino  
@@ -38,5 +38,7 @@ And it will connect automatically
 
 Now you’re ready  to compile  the iOS app  onto your device🚀
 
+#Some background
+ I developed the system for my boring room  as the  rules  prohibit   modification  of the electrical system  I decided  to use a servo  to operate  the switch
 
  
