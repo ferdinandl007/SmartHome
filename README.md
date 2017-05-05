@@ -20,7 +20,7 @@ Now Connecting  the servo  to the ESP  connect  the yellow cable  of the servo  
 the black/ brown cable  ground  and  the red cable  to VCC 
 and now upload the sketch and you are done✅ 
 
-Remember remember  To open the debugging terminal to note the IP address 
+Remember to open the debugging terminal to note the IP address 
 As you will be needing this letter on  for the  iOS app   if you  just want to use Alexa 
 this is not necessary  just ask Alexa to discover the   devices
 And it will connect automatically
