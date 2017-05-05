@@ -29,10 +29,10 @@ And it will connect automatically
  file  go to  the file  name URL   in the iOS target  and widget target   change  
  the IP address  remember  do not change  anything  but IP address  so keep everything   after the backward /
  
-    let urlON = "http://172.20.104.8/on"
-    let urlOFF = "http://172.20.104.8/off"
-    let urlConnect = "http://172.20.104.8/index.html"
-    let urlTemp = "http://172.20.104.8/temp"
+    let urlON = "http://000.00.000.0/on"
+    let urlOFF = "http://000.00.000.0/off"
+    let urlConnect = "http://000.00.000.0/index.html"
+    let urlTemp = "http://000.00.000.0/temp"
     
 
 
