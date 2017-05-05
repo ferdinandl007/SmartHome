@@ -2,8 +2,8 @@
 #include <ESP8266WebServer.h>
 #include <WiFiUdp.h>
 #include <functional>
-#include <Servo.h>
-#include<Wire.h>
+
+
 
 void prepareIds();
 boolean connectWifi();
@@ -24,7 +24,7 @@ unsigned int portMulti = 1900;      // local port to listen on
 
 ESP8266WebServer HTTP(80);
 
-Servo servoMain;
+
  
 boolean wifiConnected = false;
 
@@ -35,10 +35,8 @@ String persistent_uuid;
 String device_name;
 
 
-const int MPU_addr=0x68;  // I2C address of the MPU-6050
-int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
-
 int mode = 0;
+
 
 
 
@@ -46,19 +44,14 @@ boolean cannotConnectToWifi = false;
 
 void setup() {
   Serial.begin(115200);
-
-  Wire.begin(D1, D2); // sda, scl
-  Wire.begin();
-  Wire.beginTransmission(MPU_addr);
-  Wire.write(0x6B);  // PWR_MGMT_1 register
-  Wire.write(0);     // set to zero (wakes up the MPU-6050)
-  Wire.endTransmission(true);
-  
+  pinMode(D4, OUTPUT);
+  digitalWrite(D4, HIGH);
   prepareIds();
-  
-  // Initialise wifi connection
-  wifiConnected = connectWifi();
 
+    while(!wifiConnected) {
+      wifiConnected = connectWifi();
+      delay(1000);
+   }
   // only proceed if wifi connection successful
   if(wifiConnected){
     udpConnected = connectUDP();
@@ -83,9 +76,7 @@ void loop() {
 
   HTTP.handleClient();
   delay(1);
-  Tmp=Wire.read()<<8|Wire.read();
-  
-  
+ 
   // if there's data available, read a packet
   // check if the WiFi and UDP connections were successful
   if(wifiConnected){
@@ -145,7 +136,7 @@ void prepareIds() {
 
   serial = String(uuid);
   persistent_uuid = "Socket-1_0-" + serial;
-  device_name = "Room Light";
+  device_name = "TV";
 }
 
 void respondToSearch() {
@@ -160,7 +151,7 @@ void respondToSearch() {
     sprintf(s, "%d.%d.%d.%d", localIP[0], localIP[1], localIP[2], localIP[3]);
 
     String response = 
-         "HTTP/1.1 200 OK\r\n"
+         "HTTP/1.1 200 OK supreme leader\r\n"
          "CACHE-CONTROL: max-age=86400\r\n"
          "DATE: Fri, 15 Apr 2016 04:56:29 GMT\r\n"
          "EXT:\r\n"
@@ -184,17 +175,6 @@ void startHttpServer() {
       Serial.println("Got Request index.html ...\n");
       HTTP.send(200, "text/plain", String(mode));
     });
-   
-    HTTP.on("/off", HTTP_GET, [](){
-      turnOffRelay();
-      HTTP.send(200, "text/plain", "switched off now");
-    });
-
-     HTTP.on("/on", HTTP_GET, [](){
-      turnOnRelay();
-      HTTP.send(200, "text/plain", "switched ON now");
-    });
-
   
     HTTP.on("/upnp/control/basicevent1", HTTP_POST, []() {
       Serial.println("########## Responding to  /upnp/control/basicevent1 ... ##########");      
@@ -353,41 +333,23 @@ boolean connectUDP(){
 
 
 void turnOnRelay() {
-   if (mode == 0) {
-   Serial.println(" switched on");
-   servoMain.attach(2);
-   delay(50);   
-   servoMain.write(180);   // Turn Servo Left to 0 degrees
-   delay(200);          // Wait 1 second
-   servoMain.write(90);  // Turn Servo back to center position (90 degrees)
-   delay(10);
-   servoMain.write(0);
-   delay(140);
-   servoMain.write(90);  // Turn Servo back to center position (90 degrees)
-   delay(10);
-   mode = 1;
-   servoMain.detach();  
-   
-   }
+  if (mode == 0){
+  digitalWrite(D4, LOW);
+  delay(500);    
+  digitalWrite(D4, HIGH);
+  Serial.println("ON");
+  mode = 1;
+  }
  
 }
 
 void turnOffRelay() {
-   if (mode == 1){
-    Serial.println(" switched Off");
-    servoMain.attach(2);
-   delay(50);   
-    servoMain.write(0);   // Turn Servo Left to 0 degrees
-   delay(200);          // Wait 1 second
-   servoMain.write(90);  // Turn Servo back to center position (90 degrees)
-   delay(10);
-   servoMain.write(180);
-   delay(140);
-   servoMain.write(90);  // Turn Servo back to center position (90 degrees)
-   delay(10);
-   mode = 0;
-   servoMain.detach();
-  
-   } 
+  if (mode == 1) {
+  digitalWrite(D4, LOW);
+  delay(500);    
+  digitalWrite(D4, HIGH);
+  Serial.println("OFF");
+  mode = 0;
+  } 
   
 }
