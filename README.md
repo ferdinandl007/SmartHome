@@ -1,6 +1,6 @@
 # SmartHome
 
-[linkname](https://www.youtube.com/watch?v=D-yCt-Ropl0)
+[demo video here](https://www.youtube.com/watch?v=D-yCt-Ropl0)
 Ultimate Smart home Alexa plus iOS solution when you don't want to mess with main voltage 
 It uses 2 ESP8266   one for the light switch controlling a sorvo and another one controlling the TV//📺 
 Simply Open  .ino  
