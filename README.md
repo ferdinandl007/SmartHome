@@ -39,6 +39,6 @@ And it will connect automatically
 Now you’re ready  to compile  the iOS app  onto your device🚀
 
 ### Some background
- I developed the system for my boring room  as the  rules  prohibit   modification  of the electrical system  I decided  to use a servo  to operate  the switch
+ I developed the system for my boring room at my school As the school rules  prohibit modification of the electrical system  I decided  to use a servo  to operate  the switch
 
  
