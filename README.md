@@ -40,5 +40,5 @@ Now you’re ready  to compile  the iOS app  onto your device🚀
 
 ### Some background
  I developed the system for my boring room at my school As the school rules  prohibit modification of the electrical system  I decided  to use a servo  to operate  the switch
-
  
+ Get the SLT file for the 3D printed enclosure [here](http://www.thingiverse.com/thing:2307874)
